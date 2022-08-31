@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>yueting</title>
+
+    <!-- 引入vue.js -->
+    <script src="js\vue.js"></script>
+    <!-- 引入axios -->
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+
+    <!-- 引入样式 -->
+    <link rel="stylesheet" href="style\body.css">
+    <link rel="stylesheet" href="style\top.css">
+    <link rel="stylesheet" href="style\main.css">
+    <link rel="stylesheet" href="style\left.css">
+    <link rel="stylesheet" href="style\middle.css">
+    <link rel="stylesheet" href="style\right.css">
+    <link rel="stylesheet" href="style\bottom.css">
+
+    <link rel="stylesheet" href="font_3580792_kjbesplmdt\iconfont.css">
+
+</head>
+<body >
+    <div id="app">
+        <!-- top -->
+        <div id="top">
+            <div class="searchBar">
+                <input type="search" v-model="music_name" @keyup.enter="getMusic" >
+                <button type="submit" @keyup.enter="getMusic">Go</button>
+            </div>
+        </div>
+        <!-- main -->
+        <div id="main">
+            <div id="left">
+                <ul class="songs-list">
+                    <li v-for="item in music_list">
+                        <a href="#" class="iconfont icon-yunhang" @click="musicDetail(item.id)"></a>
+                        <a href="#" class="music" @click="playMusic(item.id)">{{ item.name }}</a>
+                        <!-- <a href="">{{ item.album.artist.name }}</a> -->
+                        <a href="#" class="iconfont icon-shipin" v-if="item.mvid!=0" @click="playMv(item.mvid)"></a>
+                    </li>
+                </ul>
+            </div>
+            <div id="middle">
+                <div class="cover" :class="{active:isActive}" >
+                    <img class="changbi" src="img\唱臂.png" alt="">
+                    <img class="changpian" src="img\专辑.png" alt="">
+                    <img class="musicPic" :src="musicPicUrl" >
+                </div>
+                <div class="name">
+                    <span>{{  }}</span>
+                </div>
+            </div>
+            <div id="right">
+                <div class="post">
+                    <textarea v-model="myComment"></textarea>
+                    <button type="submit">send</button>
+                </div>
+                <ul class="comments">
+                    <li class="user" v-for="item in musicComment_list">
+                        <div class="user_detail">
+                            <img :src="item.user.avatarUrl">
+                            <span class=user_name>{{ item.user.nickname }}</span>
+                        </div>
+                        <p class="user_comments">
+                            {{ item.content }}
+                        </p>
+                    </li> 
+                </ul>
+            </div>
+        </div>
+        <!-- bottom -->
+        <div id="bottom">
+            <audio :src="musicUrl" controls autoplay @play="play" @pause="pause" ></audio>
+        </div>
+        <!-- vedio -->
+        <div id="video" v-if="isShow" >
+            <video controls="controls"></video>
+            <div :src="mvUrl" class="mask"></div>
+        </div>
+    </div>
+
+    <!-- 引入js -->
+    <script src="js\index.js" defer ></script>
+</body>
+</html>

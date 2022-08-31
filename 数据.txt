@@ -1,0 +1,13 @@
+歌曲搜索接口
+https://autumnfish.cn/search
+歌曲地址接口
+https://autumnfish.cn/song/url
+封面地址接口
+https://autumnfish.cn/song/detail   
+    请求参数：ids  （歌曲id）
+评论地址接口
+https://autumnfish.cn/comment/hot?type=0
+    请求参数：id
+mv接口地址
+https://autumnfish.cn/mv/url
+    请求参数：id（mvid为0则无mv）
